@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.ts" "*.js" "*.jsx" "*.tsx" | tr '\n' ' ')
+
+# If there are staged files, run the checks
+if [ -n "$STAGED_FILES" ]; then
+  make format
+  make lint-fix
+  make check-types
+fi

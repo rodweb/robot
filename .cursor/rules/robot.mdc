@@ -1,0 +1,22 @@
+---
+description: Robot
+globs: *.ts
+---
+
+# Robot
+Robot is my personal bot to assist me on various tasks.
+
+# Tech stack
+- Language: TypeScript
+- Runtime: Deno
+- Infrastructure: Supabase
+- Database: Postgres
+- Frontend: Telegram
+- Telegram bot framework: Grammy
+- CI/CD: GitHub Actions
+
+# Code instructions
+- Do not use the type "any", unless strictly necessary.
+
+# General notes
+- Do not make suggestions for tools or services other than the ones listed here, unless asked.
