@@ -67,3 +67,23 @@ jobs:
           -d '{
               "url": "https://${{ secrets.SUPABASE_PROJECT_ID }}.supabase.co/functions/v1/telegram-webhook"
           }'
+
+      - name: Notify Telegram on Success
+        if: success()
+        run: |
+          curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -H "Content-Type: application/json" \
+          -d '{
+              "chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}",
+              "text": "✅ Deployment successful!\nRepository: ${{ github.repository }}\nCommit: ${{ github.sha }}"
+          }'
+
+      - name: Notify Telegram on Failure
+        if: failure()
+        run: |
+          curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -H "Content-Type: application/json" \
+          -d '{
+              "chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}",
+              "text": "❌ Deployment failed!\nRepository: ${{ github.repository }}\nCommit: ${{ github.sha }}"
+          }'
